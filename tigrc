@@ -1,0 +1,68 @@
+# global setting
+set line-graphics = utf-8
+set diff-context = 5
+
+
+# view columns
+set main-view = id:width=10 date:short author:width=0 commit-title:graph=yes,refs=yes
+set blame-view = id:width=10 date:short author text
+set tree-view = id author date:short mode file-name
+
+
+# Color Settings
+color default white black
+color cursor black white
+
+# status view
+color status default default bold
+
+color id red default
+color date white default
+color author yellow default bold
+color delimiter cyan default
+
+color diff-index blue default
+color diff-chunk magenta default
+
+color "Reported-by:" green default
+color graph-commit magenta default
+color overflow red blue
+
+# diff option
+set diff-options = --ignore-space-change --histogram
+
+# Title area
+color title-focus cyan black bold underline
+color title-blur cyan black
+
+# File and Directory
+color file default default
+color directory cyan default bold
+
+# Main view colors
+color main-commit cyan black
+color main-head white black
+
+
+# unbind default keymap
+bind main g move-first-line
+bind main G move-last-line
+
+
+# key mapping
+bind main <Ctrl-g> view-grep
+bind generic g move-first-line
+bind generic G move-last-line
+
+bind generic l scroll-right
+bind generic h scroll-left
+
+bind generic i view-log
+bind generic ? view-help
+
+# status-view
+bind status s status-update
+bind status c !git commit
+bind status p !git add -p
+
+

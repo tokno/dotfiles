@@ -1,0 +1,7 @@
+[user]
+    name = Takuya Okuno
+    email = ctrlatmark@gmail.com
+[color]
+    ui = auto
+[diff]
+    algorithm = histogram

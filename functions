@@ -1,0 +1,123 @@
+# ~/tmp に作業ディレクトリを作成する
+function wkd() {
+    local basedir=~/tmp
+    local today=$(date +"%Y%m%d")
+    local wkdir=$basedir/$today
+
+    while getopts chlst OPT; do
+        case $OPT in
+            c)
+                local cleanup=1
+                ;;
+            h)
+                local help=1
+                ;;
+            l)
+                local list=1
+                ;;
+            s)
+                local stay=1
+                ;;
+            t)
+                local tree=1
+                ;;
+        esac
+    done
+
+    if [ $help ]; then
+        echo "Usage: wkdir [ options ]"
+        echo "    作業ディレクトリを作成し、作成したディレクトリをカレントディレクトリに変更します。"
+        echo ""
+        echo "Options:"
+        echo "    -c"
+        echo "        当日分の作業ディレクトリを残し、全ての作業ディレクトリを削除します。(未実装)"
+        echo "    -h"
+        echo "        wkdirコマンドの使い方を表示します。"
+        echo "    -l"
+        echo "        作成済みの作業ディレクトリの一覧を表示します。"
+        echo "    -s"
+        echo "        コマンド実行後のディレクトリ移動を行いません。"
+        echo "    -t"
+        echo "        作成済みの作業ディレクトリ内をツリー表示します。"
+        return
+    fi
+
+    # TODO 未実装
+    if [ $cleanup ]; then
+        echo "Cleanup option is not implementad."
+        return
+    fi
+
+    # TODO ディレクトリ判定処理を修正
+    if [ $list ]; then
+        ls -F $basedir | grep "[0-9]\{4\}[0-9]\{1,2\}[0-9]\{1,2\}/"
+        return
+    fi
+
+    if [ $tree ]; then
+        if type tree > /dev/null 2>&1; then
+            tree --noreport -L 3 $basedir
+        fi
+        return
+    fi
+
+
+    if ! [ -d $wkdir ]; then
+        mkdir -p $wkdir
+    fi
+
+    if ! [ $stay ]; then
+        cd $wkdir
+    fi
+
+    export WORK_DIR=$wkdir
+}
+
+
+function mkcd() {
+    mkdir -p $1 && cd $1
+}
+
+# 現在時刻を ''
+function now() {
+    date +"%Y%m%d%H%M%N"
+}
+
+function test256color() {
+    for c in {000..255}; do
+        echo -n "\e[38;5;${c}m $c"
+        [ $(($c%16)) -eq 15 ] && echo
+    done
+}
+
+function _history_peco() {
+    BUFFER=`history -n 0 | peco`
+    CURSOR=$#BUFFER
+}
+
+# 圧縮ファイルの展開
+function extract() {
+  case $1 in
+    *.tar.gz|*.tgz) tar xzvf "$1";;
+    *.tar.xz) tar Jxvf "$1";;
+    *.zip) unzip "$1";;
+    *.lzh) lha e "$1";;
+    *.tar.bz2|*.tbz) tar xjvf "$1";;
+    *.tar.Z) tar zxvf "$1";;
+    *.gz) gzip -d "$1";;
+    *.bz2) bzip2 -dc "$1";;
+    *.Z) uncompress "$1";;
+    *.tar) tar xvf "$1";;
+    *.arj) unarj "$1";;
+  esac
+}
+
+# カレントディレクトリをtree表示
+# TODO depthをオプションに
+function lst() {
+    ROOT=$PWD
+    DEPTH=2
+
+    tree --dirsfirst -N -C -L $DEPTH $ROOT | less -R
+}
+

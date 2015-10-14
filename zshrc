@@ -165,7 +165,7 @@ bindkey "^X^P" _history_peco
 prompt_vcs_status=1
 
 # gitリポジトリ情報を表示する
-# [master@dotfiles staged:1 untracked:0]
+# [staged:1 untracked:0 master@dotfiles]
 function _prompt_git_info() {
     local repodir=`git rev-parse --show-toplevel 2> /dev/null`
 
@@ -198,34 +198,40 @@ function _prompt_git_info() {
     working_change=`echo -n "$working" | grep -v " " | grep -v "?" | wc -l | tr -d " "`
     untracked_file=`echo -n "$st" | grep "??" | wc -l | tr -d " "`
 
-    local status_text=""
+    local changes
     if [[ $staging_change -ne "0" ]]; then
-        status_text="$status_text staged:$staging_change"
+        changes=($changes "staged:$staging_change")
     fi
 
     if [[ $working_change -ne "0" ]]; then
-        status_text="$status_text unstaged:$working_change"
+        changes=($changes "unstaged:$working_change")
     fi
 
     if [[ $untracked_file -ne "0" ]]; then
-        status_text="$status_text untracked:$untracked_file"
+        changes=($changes "untracked:$untracked_file")
+    fi
+
+    local padding
+
+    if [[ -n "$changes" ]];then
+        padding=" "
     fi
 
     local color
     if [[ "$staging_change" != "0" && "$working_change" != "0" ]]; then
-        color="208"
+        color="214"
     elif [[ "$staging_change" != "0" ]]; then
-        color="112"
+        color="120"
     elif [[ "$working_change" != "0" ]]; then
-        color="220"
+        color="227"
     else
         color="117"
     fi
 
     local git_label
-    git_label="%B$branch@$reponame%b$status_text"
+    git_label="%B$branch@$reponame%b"
 
-    echo -n " [%{\e[38;5;${color}m%}${git_label}%{\e[m%}]"
+    echo -n " [${changes}${padding}%{\e[38;5;${color}m%}${git_label}%{\e[m%}]"
 }
 
 # エラーが発生したらプロンプトに表示

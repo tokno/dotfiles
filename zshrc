@@ -164,7 +164,8 @@ bindkey "^X^P" _history_peco
 # Gitリポジトリのファイル情報表示
 prompt_vcs_status=1
 
-# TODO 変更されたファイル数を表示
+# gitリポジトリ情報を表示する
+# [master@dotfiles staged:1 untracked:0]
 function _prompt_git_info() {
     local repodir=`git rev-parse --show-toplevel 2> /dev/null`
 
@@ -175,58 +176,56 @@ function _prompt_git_info() {
 
     local reponame=`basename $repodir`
     local branch=`git rev-parse --abbrev-ref HEAD 2> /dev/null`
-    local git_label="[Git $branch@$reponame]"
 
     # ステータス出力offの場合
     if [ $prompt_vcs_status -eq 0 ]; then
-        echo " ${git_label}"
+        echo " [Git $branch@$reponame]"
         return
     fi
 
     local st
     st=`git status --porcelain 2> /dev/null`
 
-    local ready_to_commit=0 # コミット待ち(staged)
-    local edited=0          # 変更有り(modified)
-    local entry_changed=0   # ファイル追加削除(untracked or deleted)
+    local staging
+    local working
+    staging=`echo -n "$st" | cut -c 1`
+    working=`echo -n "$st" | cut -c 2`
 
-    if [[ -n `echo "$st" | grep "^[M|A]"` ]]; then
-        ready_to_commit=1
+    local staging_change
+    local working_change
+    local untracked_file
+    staging_change=`echo -n "$staging" | grep -v " " | grep -v "?" | wc -l`
+    working_change=`echo -n "$working" | grep -v " " | grep -v "?" | wc -l`
+    untracked_file=`echo -n "$st" | grep "??" | wc -l`
+
+    local status_text=""
+    if [[ $staging_change -ne "0" ]]; then
+        status_text="$status_text staged:$staging_change"
     fi
 
-    # Modified
-    if [[ -n `echo "$st" | grep "^.M"` ]]; then
-        edited=1
+    if [[ $working_change -ne "0" ]]; then
+        status_text="$status_text unstaged:$working_change"
     fi
 
-    # Renamed
-    if [[ -n `echo "$st" | grep "^R"` ]]; then
-        entry_changed=1
-    fi
-
-    if [[ -n `echo "$st" | grep "^??"` ]]; then
-        entry_changed=1
-    fi
-
-    if [[ -n `echo "$st" | grep "^.D"` ]]; then
-        entry_changed=1
+    if [[ $untracked_file -ne "0" ]]; then
+        status_text="$status_text untracked:$untracked_file"
     fi
 
     local color
-
-    if [ "$edited" -eq 0 -a "$entry_changed" -eq 1 ]; then
-        color="196"
-    elif [ "$edited" -eq 1 -a "$entry_changed" -eq 1 ]; then
-        color="141"
-    elif [ "$edited" -eq 1 -a "$entry_changed" -eq 0 ]; then
-        color="220"
-    elif [ "$ready_to_commit" -eq 1 ]; then
+    if [[ "$staging_change" != "0" && "$working_change" != "0" ]]; then
+        color="208"
+    elif [[ "$staging_change" != "0" ]]; then
         color="112"
+    elif [[ "$working_change" != "0" ]]; then
+        color="220"
     else
-        color="75"
+        color="117"
     fi
 
-    echo -n " %{\e[38;5;${color}m%}${git_label}%{\e[m%}"
+    local git_label
+    git_label="%B$branch@$reponame%b$status_text"
+
+    echo -n " [%{\e[38;5;${color}m%}${git_label}%{\e[m%}]"
 }
 
 # エラーが発生したらプロンプトに表示

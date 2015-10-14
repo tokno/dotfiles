@@ -194,9 +194,9 @@ function _prompt_git_info() {
     local staging_change
     local working_change
     local untracked_file
-    staging_change=`echo -n "$staging" | grep -v " " | grep -v "?" | wc -l`
-    working_change=`echo -n "$working" | grep -v " " | grep -v "?" | wc -l`
-    untracked_file=`echo -n "$st" | grep "??" | wc -l`
+    staging_change=`echo -n "$staging" | grep -v " " | grep -v "?" | wc -l | tr -d " "`
+    working_change=`echo -n "$working" | grep -v " " | grep -v "?" | wc -l | tr -d " "`
+    untracked_file=`echo -n "$st" | grep "??" | wc -l | tr -d " "`
 
     local status_text=""
     if [[ $staging_change -ne "0" ]]; then

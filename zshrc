@@ -116,6 +116,7 @@ alias zcp='noglob zmv -WC'
 ### Prompt ###
 setopt no_flow_control
 setopt print_eight_bit
+setopt interactive_comments
 
 # タイトルにuser@hostnameを表示
 function echo_terminal_info_title() {

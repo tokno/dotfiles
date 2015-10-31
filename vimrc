@@ -141,6 +141,9 @@ filetype plugin indent on
 " シンタックスハイライト
 syntax on
 
+" 背景を黒に
+set background=dark
+
 " タブ表示
 set showtabline=2
 

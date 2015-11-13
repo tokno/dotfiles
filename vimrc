@@ -127,6 +127,8 @@ NeoBundle 'thinca/vim-editvar'
 " 行末スペースを可視化
 NeoBundle 'bronson/vim-trailing-whitespace'
 
+set runtimepath+=~/.fzf
+
 
 call neobundle#end()
 
@@ -315,7 +317,6 @@ if executable('ag')
   let g:unite_source_grep_command = 'ag'
   let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
   let g:unite_source_grep_recursive_opt = ''
-  let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
 endif
 
 " NeoComplete
@@ -472,7 +473,9 @@ map ? <Plug>(incsearch-backward)
 
 " Unite
 nnoremap <Leader>u :Unite -start-insert<CR>
-nnoremap <C-p> :Unite -start-insert -no-split -smartcase file_rec/async:!<CR>
+
+" FZF
+nnoremap <C-p> :FZF<CR>
 
 " Unite buffer
 nnoremap t :Unite buffer<CR>

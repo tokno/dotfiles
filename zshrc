@@ -308,4 +308,8 @@ export DEFAULT_CHEAT_DIR=~/dotfiles/cheatsheets
 
 [ -f ~/dotfiles/functions ] && source ~/dotfiles/functions
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+if [ -f ~/.fzf.zsh ];then
+    export FZF_DEFAULT_COMMAND='ag -g ""'
+    source ~/.fzf.zsh
+fi
 

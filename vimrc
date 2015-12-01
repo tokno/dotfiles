@@ -298,6 +298,8 @@ let g:extra_whitespace_ignored_filetypes = ['unite']
 
 let g:haskell_conceal = 0
 
+" colorizer
+let g:colorizer_nomap = 1
 
 " quickrun
 let g:quickrun_config = {

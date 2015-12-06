@@ -392,6 +392,11 @@ call submode#enter_with('tab-operation', 'n', '', 'gT', 'gT')
 call submode#map('tab-operation', 'n', '', 't', 'gt')
 call submode#map('tab-operation', 'n', '', 'T', 'gT')
 
+call submode#enter_with('tab-operation', 'n', '', 'gl', 'gt')
+call submode#enter_with('tab-operation', 'n', '', 'gh', 'gT')
+call submode#map('tab-operation', 'n', '', 'l', 'gt')
+call submode#map('tab-operation', 'n', '', 'h', 'gT')
+
 
 " ========================================
 " キーマップ変更

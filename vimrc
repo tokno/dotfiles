@@ -65,9 +65,6 @@ NeoBundle 'valloric/MatchTagAlways'
 " CoffeeScript
 NeoBundle 'kchmck/vim-coffee-script'
 
-" rails
-NeoBundle 'basyura/unite-rails'
-
 
 " エディタ機能拡張
 " ------------------------------
@@ -486,27 +483,6 @@ nnoremap <C-p> :FZF<CR>
 
 " Unite buffer
 nnoremap t :Unite buffer<CR>
-
-" unite-rails key mapping.
-function! s:rails_config()
-    let root = unite#sources#rails#helper#rails_root()
-    if root != ""
-        nnoremap <buffer> U :Unite -start-insert<CR>rails/
-        nnoremap gv :Unite -start-insert -no-split -smartcase rails/view<CR>
-        nnoremap gm :Unite -start-insert -no-split -smartcase rails/model<CR>
-        nnoremap gc :Unite -start-insert -no-split -smartcase rails/controller<CR>
-        nnoremap gr :Unite -start-insert -no-split -smartcase rails/route<CR>
-        nnoremap gd :Unite -start-insert -no-split -smartcase rails/db<CR>
-        nnoremap gh :Unite -start-insert -no-split -smartcase rails/helper<CR>
-        nnoremap ga :Unite -start-insert -no-split -smartcase rails/asset<CR>
-        nnoremap gs :Unite -start-insert -no-split -smartcase rails/spec<CR>
-    endif
-endfunction
-
-augroup rails_mapping
-    autocmd!
-    autocmd BufRead * :call s:rails_config()
-augroup END
 
 " Unite mark
 nnoremap <Leader>m :Unite mark<CR>

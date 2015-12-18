@@ -7,7 +7,7 @@ SAVEHIST=100000
 
 WORDCHARS='*?_-.[]~=&;&%^(){}<>'
 
-# ls colors
+# lsコマンドのカラー設定
 export LS_COLORS="di=01;36:ln=04;33:ex=31"
 export LSCOLORS="Gxdxxxxxbxxxxxxxxxxxxx"
 zstyle ':completion:*' list-colors 'di=01;36' 'ln=04;33' 'ex=31'
@@ -35,7 +35,7 @@ alias -s {gz,tgz,zip,lzh,bz2,tbz,Z,tar,arj,xz}=extract
 bindkey -e
 bindkey "^U" backward-kill-line
 
-# unbind rarely used commands
+# 使わないキーバインドを削除
 bindkey -r '^X^K' # kill-buffer
 bindkey -r '^X^N' # infer-next-history
 bindkey -r '^[a'  # accept-and-hold
@@ -85,20 +85,30 @@ bindkey "^N" history-beginning-search-forward-end
 # completion
 setopt complete_aliases
 
-# history
+# コマンド履歴
 setopt hist_ignore_all_dups
 setopt hist_save_nodups
 setopt hist_ignore_space
 setopt hist_reduce_blanks
 setopt hist_no_store
 setopt inc_append_history
+setopt share_history
 
-# cd
+# ディレクトリ移動
+setopt cdable_vars
 setopt auto_cd
 setopt pushd_ignore_dups
 setopt auto_pushd
 
-# no beep
+# zmv
+autoload -Uz zmv
+alias zmv='noglob zmv -W'
+alias zcp='noglob zmv -WC'
+
+# プロンプト
+setopt no_flow_control
+setopt print_eight_bit
+setopt interactive_comments
 setopt no_beep
 
 # menu
@@ -107,16 +117,6 @@ setopt auto_list
 
 # correct
 setopt correct
-
-# zmv
-autoload -Uz zmv
-alias zmv='noglob zmv -W'
-alias zcp='noglob zmv -WC'
-
-### Prompt ###
-setopt no_flow_control
-setopt print_eight_bit
-setopt interactive_comments
 
 # タイトルにuser@hostnameを表示
 function echo_terminal_info_title() {
@@ -308,7 +308,7 @@ export DEFAULT_CHEAT_DIR=~/dotfiles/cheatsheets
 
 [ -f ~/dotfiles/functions ] && source ~/dotfiles/functions
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
-if [ -f ~/.fzf.zsh ];then
+if [ -f ~/.fzf.zsh ]; then
     export FZF_DEFAULT_COMMAND='ag -g ""'
     source ~/.fzf.zsh
 fi

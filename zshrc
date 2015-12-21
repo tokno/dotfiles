@@ -23,9 +23,6 @@ alias ......="cd ../../../../.."
 alias .......="cd ../../../../../.."
 alias ........="cd ../../../../../../.."
 
-alias q=exit
-alias :q=exit
-
 alias -s txt=less
 alias -s scala=scala
 alias -s groovy=groovy

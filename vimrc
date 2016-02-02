@@ -46,6 +46,7 @@ NeoBundle 'lilydjwg/colorizer'
 
 " プログラミング系
 " ------------------------------
+NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'tyru/caw.vim'
 NeoBundle 'thinca/vim-quickrun'
 
@@ -248,6 +249,12 @@ let g:lightline = {
      \ 'separator': { 'left': "\u2b80", 'right': "\u2b82" },
      \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" }
      \ }
+
+" taglist
+let g:Tlist_Sort_Type = 'name'
+let g:Tlist_Use_Right_Window = 1
+let g:Tlist_WinWidth = 45
+let g:Tlist_Show_One_File = 1
 
 " emmet.vim
 let g:user_emmet_install_global = 0

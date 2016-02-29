@@ -40,6 +40,7 @@ NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'vim-scripts/proton'
 NeoBundle 'altercation/vim-colors-solarized'
+NeoBundle 'morhetz/gruvbox'
 
 NeoBundle 'lilydjwg/colorizer'
 
@@ -49,9 +50,6 @@ NeoBundle 'lilydjwg/colorizer'
 NeoBundle 'vim-scripts/taglist.vim'
 NeoBundle 'tyru/caw.vim'
 NeoBundle 'thinca/vim-quickrun'
-
-" Scala
-NeoBundle 'derekwyatt/vim-scala'
 
 " Haskell
 NeoBundle 'dag/vim2hs'
@@ -111,16 +109,9 @@ NeoBundle 'tsukkee/unite-tag'
 " unite mark
 NeoBundle 'tacroe/unite-mark'
 
-" vim sibnature
+" vim signature
 NeoBundle 'kshenoy/vim-signature'
 
-" context filetype
-NeoBundle 'Shougo/context_filetype.vim'
-NeoBundle 'osyo-manga/vim-precious'
-
-
-" 変数
-NeoBundle 'thinca/vim-editvar'
 
 " 行末スペースを可視化
 NeoBundle 'bronson/vim-trailing-whitespace'
@@ -237,6 +228,12 @@ augroup END
 
 " プラグイン設定
 " ========================================
+
+" gruvbox
+let g:gruvbox_italic=1
+let g:gruvbox_italicize_strings=1
+let g:gruvbox_contrast_dark='soft'
+let g:gruvbox_contrast_light='soft'
 
 " lightline
 set laststatus=2

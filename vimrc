@@ -47,7 +47,7 @@ NeoBundle 'lilydjwg/colorizer'
 
 " プログラミング系
 " ------------------------------
-NeoBundle 'vim-scripts/taglist.vim'
+NeoBundle 'majutsushi/tagbar'
 NeoBundle 'tyru/caw.vim'
 NeoBundle 'thinca/vim-quickrun'
 
@@ -247,11 +247,8 @@ let g:lightline = {
      \ 'subseparator': { 'left': "\u2b81", 'right': "\u2b83" }
      \ }
 
-" taglist
-let g:Tlist_Sort_Type = 'name'
-let g:Tlist_Use_Right_Window = 1
-let g:Tlist_WinWidth = 45
-let g:Tlist_Show_One_File = 1
+" tagbar
+let g:tagbar_width = 50
 
 " emmet.vim
 let g:user_emmet_install_global = 0
@@ -490,6 +487,10 @@ nnoremap t :Unite buffer<CR>
 
 " Unite mark
 nnoremap <Leader>m :Unite mark<CR>
+
+
+" tagbar
+nnoremap <Leader>l :TagbarToggle<CR>
 
 
 " caw.vim

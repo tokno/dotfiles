@@ -157,6 +157,7 @@ set noundofile
 set incsearch
 set noignorecase
 set hlsearch
+set nowrapscan
 
 "クリップボード同期
 if has('mac') || has('win64') || has('win32')

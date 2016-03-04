@@ -276,6 +276,7 @@ PROMPT2="%{${fg[white]}%}%_> %{${reset_color}%}"
 RPROMPT=$'`_right_prompt`'
 SPROMPT="%{${fg[yellow]}%}%r is correct? [Yes, No, Abort, Edit]:%{${reset_color}%}"
 
+REPORTTIME=1
 
 precmd() {
     echo_terminal_info_title

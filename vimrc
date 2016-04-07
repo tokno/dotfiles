@@ -276,7 +276,7 @@ let g:user_emmet_settings = {
      \    },
      \ }
 
-autocmd FileType html,css,eruby EmmetInstall
+autocmd FileType html,css,eruby,php EmmetInstall
 
 
 " caw.vim
@@ -505,7 +505,7 @@ vmap <Enter> <Plug>(EasyAlign)
 " emmet
 augroup emmet_mapping
   autocmd!
-  autocmd FileType html,css,eruby imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+  autocmd FileType html,css,eruby,php imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 augroup END
 
 

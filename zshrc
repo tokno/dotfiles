@@ -311,3 +311,8 @@ if [ -f ~/.fzf.zsh ]; then
     source ~/.fzf.zsh
 fi
 
+path=(
+    ~/bin(N-/)
+    $path
+)
+

@@ -226,6 +226,14 @@ let g:gruvbox_contrast_light='soft'
 " lightline
 set laststatus=2
 let g:lightline = {
+     \ 'active': {
+     \   'left': [ [ 'mode', 'paste' ], [ 'readonly', 'relativepath', 'modified' ] ],
+     \   'right': [ [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ]
+     \ },
+     \ 'inactive': {
+     \   'left': [ [ 'filename' ] ],
+     \   'right': [ [ 'lineinfo' ], [ 'percent' ] ]
+     \ },
      \ 'tabline': {
      \   'left': [ [ 'tabs' ] ],
      \   'right': [  ],

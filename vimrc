@@ -1,125 +1,112 @@
 scriptencoding utf-8
 
+let s:dein_dir = expand('~/.cache/dein')
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
-" 環境毎の変数
-if has('unix')
-  let $VIM_PATH=expand('~/.vim')
-elseif has('win64') || has('win32')
-  let $VIM_PATH=expand('$VIM')
+" install dein.vim
+if &runtimepath !~# '/dein.vim'
+  if !isdirectory(s:dein_repo_dir)
+    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+  endif
+  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
-
-
-if has('vim_starting')
-  set runtimepath+=$VIM_PATH/bundle/neobundle.vim/
-endif
-
-
-" Required:
-call neobundle#begin(expand('$VIM_PATH/bundle/'))
-
-
-
-" プラグイン
-" ========================================
-
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'windows' : 'tools\\update-dll-mingw',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ }
-
-" ステータス表示
-NeoBundle 'itchyny/lightline.vim'
-
-" カラースキーム
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'vim-scripts/proton'
-NeoBundle 'altercation/vim-colors-solarized'
-NeoBundle 'morhetz/gruvbox'
-
-NeoBundle 'lilydjwg/colorizer'
-
-
-" プログラミング系
-" ------------------------------
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'tyru/caw.vim'
-NeoBundle 'thinca/vim-quickrun'
-
-" Haskell
-NeoBundle 'dag/vim2hs'
-
-" JavaScript
-NeoBundle 'jelera/vim-javascript-syntax'
-
-" html
-NeoBundle 'mattn/emmet-vim'
-NeoBundle 'valloric/MatchTagAlways'
-
-" CoffeeScript
-NeoBundle 'kchmck/vim-coffee-script'
-
-
-" エディタ機能拡張
-" ------------------------------
-" Surround
-NeoBundle 'tpope/vim-surround'
-
-" Ansi color
-NeoBundle 'vim-scripts/AnsiEsc.vim'
-
-" ファイラ
-NeoBundle 'justinmk/vim-dirvish'
-
-" submode
-NeoBundle 'kana/vim-submode'
-
-
-" 自動保存
-NeoBundle 'vim-scripts/vim-auto-save'
-
-" 検索
-NeoBundle 'haya14busa/incsearch.vim'
-NeoBundle 'rking/ag.vim'
-NeoBundle 'bronson/vim-visual-star-search'
-NeoBundle 'deris/vim-shot-f'
-
-" 閉じを自動入力
-NeoBundle 'jiangmiao/auto-pairs'
-NeoBundle 'tpope/vim-endwise'
-
-" vim-easy-align
-NeoBundle 'junegunn/vim-easy-align'
-
-" テキストオブジェクト
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'kana/vim-textobj-indent'
-
-" Unite.vim
-NeoBundle 'Shougo/unite.vim'
-
-" unite tag source
-NeoBundle 'tsukkee/unite-tag'
-
-" unite mark
-NeoBundle 'tacroe/unite-mark'
-
-" vim signature
-NeoBundle 'kshenoy/vim-signature'
-
-
-" 行末スペースを可視化
-NeoBundle 'bronson/vim-trailing-whitespace'
 
 set runtimepath+=~/.fzf
 
 
-call neobundle#end()
+" Required:
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
+
+  " プラグイン
+  " ========================================
+  call dein#add('Shougo/dein.vim')
+
+  call dein#add('Shougo/neocomplete.vim')
+  call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+
+  " status line
+  call dein#add('itchyny/lightline.vim')
+
+  call dein#add('morhetz/gruvbox')
+  call dein#add('lilydjwg/colorizer')
+
+
+  " Programming
+  " ------------------------------
+  call dein#add('majutsushi/tagbar')
+  call dein#add('tyru/caw.vim')
+  call dein#add('thinca/vim-quickrun')
+
+  " Haskell
+  call dein#add('dag/vim2hs')
+
+  " JavaScript
+  call dein#add('jelera/vim-javascript-syntax')
+
+  " html
+  call dein#add('mattn/emmet-vim')
+  call dein#add('valloric/MatchTagAlways')
+
+
+  " Editor
+  " ------------------------------
+  " Surround
+  call dein#add('tpope/vim-surround')
+
+  " Ansi color
+  call dein#add('vim-scripts/AnsiEsc.vim')
+
+  " ファイラ
+  call dein#add('justinmk/vim-dirvish')
+
+  " submode
+  call dein#add('kana/vim-submode')
+
+
+  " 自動保存
+  call dein#add('vim-scripts/vim-auto-save')
+
+  " 検索
+  call dein#add('haya14busa/incsearch.vim')
+  call dein#add('rking/ag.vim')
+  call dein#add('bronson/vim-visual-star-search')
+  call dein#add('deris/vim-shot-f')
+
+  " 閉じを自動入力
+  call dein#add('jiangmiao/auto-pairs')
+  call dein#add('tpope/vim-endwise')
+
+  " vim-easy-align
+  call dein#add('junegunn/vim-easy-align')
+
+  " テキストオブジェクト
+  call dein#add('kana/vim-textobj-user')
+  call dein#add('kana/vim-textobj-indent')
+
+  " Unite.vim
+  call dein#add('Shougo/unite.vim')
+
+  " unite tag source
+  call dein#add('tsukkee/unite-tag')
+
+  " unite mark
+  call dein#add('tacroe/unite-mark')
+
+  " vim signature
+  call dein#add('kshenoy/vim-signature')
+
+
+  " 行末スペースを可視化
+  call dein#add('bronson/vim-trailing-whitespace')
+
+  call dein#end()
+  call dein#save_state()
+endif
+
+if dein#check_install()
+  call dein#install()
+endif
 
 " Required:
 filetype plugin indent on

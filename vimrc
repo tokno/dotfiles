@@ -207,7 +207,7 @@ set fenc=utf-8
 " ========================================
 augroup indent_setting
   autocmd!
-  autocmd FileType html,javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
+  autocmd FileType html,javascript,css setlocal shiftwidth=2 tabstop=2 softtabstop=2
   autocmd FileType ruby,eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
   autocmd FileType yaml setlocal shiftwidth=2 tabstop=2 softtabstop=2
   autocmd FileType haskell setlocal shiftwidth=4 tabstop=8 softtabstop=4

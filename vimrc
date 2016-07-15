@@ -48,6 +48,9 @@ if dein#load_state(s:dein_dir)
   call dein#add('mattn/emmet-vim')
   call dein#add('valloric/MatchTagAlways')
 
+  " stylus
+  call dein#add('wavded/vim-stylus')
+
 
   " Editor
   " ------------------------------
@@ -207,7 +210,7 @@ set fenc=utf-8
 " ========================================
 augroup indent_setting
   autocmd!
-  autocmd FileType html,javascript,css setlocal shiftwidth=2 tabstop=2 softtabstop=2
+  autocmd FileType html,javascript,css,stylus setlocal shiftwidth=2 tabstop=2 softtabstop=2
   autocmd FileType ruby,eruby setlocal shiftwidth=2 tabstop=2 softtabstop=2
   autocmd FileType yaml,json setlocal shiftwidth=2 tabstop=2 softtabstop=2
   autocmd FileType haskell setlocal shiftwidth=4 tabstop=8 softtabstop=4

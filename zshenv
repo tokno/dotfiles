@@ -16,6 +16,7 @@ export LC_ALL=en_US.UTF-8
 export EDITOR=vim
 
 path=(
+    ~/bin(N-/)
     ~/tools/bin(N-/)
     ~/dotfiles/bin(N-/)
   $path

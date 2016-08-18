@@ -4,9 +4,9 @@ set diff-context = 5
 
 
 # view columns
-set main-view = id:width=10 date:short author:width=0 commit-title:graph=yes,refs=yes
-set blame-view = id:width=10 date:short author text
-set tree-view = id author date:short mode file-name
+set main-view = id:width=10 date:display=default author:width=0 commit-title:graph=yes,refs=yes
+set blame-view = id:width=10 date:display=default author text
+set tree-view = id author date:display=default mode file-name
 
 
 # Color Settings
@@ -64,5 +64,4 @@ bind generic ? view-help
 bind status s status-update
 bind status c !git commit
 bind status p !git add -p
-
 

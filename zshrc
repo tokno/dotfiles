@@ -89,7 +89,6 @@ setopt hist_ignore_space
 setopt hist_reduce_blanks
 setopt hist_no_store
 setopt inc_append_history
-setopt share_history
 
 # ディレクトリ移動
 setopt cdable_vars

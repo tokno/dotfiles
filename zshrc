@@ -302,6 +302,8 @@ esac
 alias cht=cheat
 export DEFAULT_CHEAT_DIR=~/dotfiles/cheatsheets
 
+alias 'today=date +"%Y-%m-%d"'
+
 
 [ -f ~/dotfiles/functions ] && source ~/dotfiles/functions
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

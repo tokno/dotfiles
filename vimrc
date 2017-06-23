@@ -272,9 +272,12 @@ let g:user_emmet_settings = {
      \        },
      \        'empty_element_suffix': ' />',
      \    },
+     \    'javascript' : {
+     \        'extends' : 'jsx'
+     \    }
      \ }
 
-autocmd FileType html,css,eruby,php EmmetInstall
+autocmd FileType html,css,eruby,php,javascript EmmetInstall
 
 
 " caw.vim
@@ -503,7 +506,7 @@ vmap <Enter> <Plug>(EasyAlign)
 " emmet
 augroup emmet_mapping
   autocmd!
-  autocmd FileType html,css,eruby,php imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+  autocmd FileType html,css,eruby,php,javascript imap <buffer> <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
 augroup END
 
 
